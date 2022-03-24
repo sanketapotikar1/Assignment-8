@@ -1,0 +1,118 @@
+﻿Guvi Geeks Network Pvt Ltd.
+1. Solving problems using array functions on rest countries data.
+   1. Get all the countries from Asia continent /region using Filter function
+Ans:-
+const request=new XMLHttpRequest();
+request.open("GET","https://restcountries.com/v3.1/all");
+request.send()
+
+request.onload=function()
+{ if (request.status==200)
+    {
+    let a=JSON.parse(request.responseText)
+    a.map((b)=>{
+        if(b.region=="Asia")
+        {
+         console.log(b.name.official)
+        }
+
+        }); 
+}else{
+    request.onerror=function(){
+        console.log(error)
+    }
+}
+}
+
+output:-
+Georgia
+script.js:54 Lebanese Republic
+script.js:54 Kingdom of Saudi Arabia
+script.js:54 State of Qatar
+script.js:54 Democratic Republic of Timor-Leste
+script.js:54 Mongolia
+script.js:54 Republic of China (Taiwan)
+script.js:54 People's Republic of China
+script.js:54 People's Republic of Bangladesh
+script.js:54 State of Israel
+script.js:54 Sultanate of Oman
+script.js:54 State of Kuwait
+continue...
+
+
+
+   2. Get all the countries with a population of less than 2 lakhs using Filter function
+Ans:-
+const request=new XMLHttpRequest();
+request.open("GET","https://restcountries.com/v3.1/all");
+request.send()
+
+request.onload=function()
+{ if (request.status==200)
+    {
+    let a=JSON.parse(request.responseText)
+a.filter((c)=>{
+            if(c.population<=200000000){
+                console.log(c.name.official)
+            }
+        });
+   
+}else{
+    request.onerror=function(){
+        console.log(error)
+    }
+}
+}
+output:-
+Oriental Republic of Uruguay
+script.js:60 Republic of Paraguay
+script.js:60 Republic of the Gambia
+script.js:60 Republic of Djibouti
+script.js:60 Martinique
+script.js:60 Guam
+script.js:60 Georgia
+script.js:60 Belize
+continue...
+
+
+
+   3. Print the following details name, capital, flag using forEach function
+Ans:-
+ let name=[];
+        let capital=[];
+        let flag=[];
+        a.forEach(function(country)
+        { name.push(country.name.official);
+          capital.push(country.capital);
+          flag.push(country.flag);
+        })
+        console.log(name,capital,flag);
+
+
+   4. Print the total population of countries using reduce function
+Ans:-
+
+let total_Population = a.reduce((acc,population)=>
+        {
+            return acc+population.population;
+        },0)
+        console.log(total_Population);
+
+
+   5. Print the country which uses US Dollars as currency.
+Ans:-
+const getData = async() => {
+    const data = await fetch("https://restcountries.com/v3.1/all");
+    const a = await data.json();
+a.map((country)=>{
+    if(country.currencies)
+    { 
+        object.keys(country.currencies).filter((c)=>{
+            if(country.currency[c]["symbol"]==="$"){
+                console.log(country.name.official)
+            }
+        })
+    }
+})
+}
+getData();
